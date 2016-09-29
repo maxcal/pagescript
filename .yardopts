@@ -1,0 +1,14 @@
+--embed-mixin ClassMethods
+--readme           README.md
+--markup           markdown
+--markup-provider  kramdown
+--template-path    yard
+--default-return   ""
+--files            'lib/**/*.rb'
+--title            "Pagescript Documentation"
+--hide-void-return
+--protected
+--no-private
+--no-highlight
+-
+MIT-LICENSE
