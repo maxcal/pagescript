@@ -7,6 +7,7 @@ end
 require 'rdoc/task'
 require 'bundler/gem_tasks'
 require 'yard'
+require 'rspec/core/rake_task'
 
 Bundler::GemHelper.install_tasks
 
@@ -15,3 +16,6 @@ load 'rails/tasks/engine.rake'
 load 'rails/tasks/statistics.rake'
 
 YARD::Rake::YardocTask.new
+RSpec::Core::RakeTask.new(:spec)
+
+task default: :spec
