@@ -12,3 +12,13 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+# This is used to load the file 'Gemfile.local.rb' if present
+# this can be used to require additional OS dependent gems or that just should
+# not be checked in.
+user_gemfile = File.expand_path('Gemfile.local.rb', __dir__)
+if File.exists?( user_gemfile )
+  puts "reading user gemfile"
+  proc = Proc.new {}
+  eval(File.read(user_gemfile), proc.binding, user_gemfile)
+end

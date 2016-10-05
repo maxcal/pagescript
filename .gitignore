@@ -16,3 +16,6 @@ spec/dummy
 .yardoc
 /doc
 spec/examples.txt
+
+Gemfile.lock
+Gemfile.local.rb
