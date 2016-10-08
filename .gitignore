@@ -7,10 +7,11 @@ spec/dummy/log/*.log
 spec/dummy/tmp/
 spec/examples.txt
 
+/tmp
+
 .bundle/
 log/*.log
 pkg/
-spec/dummy
 
 # Yard generated documentation
 .yardoc

@@ -18,7 +18,6 @@ gemspec
 # not be checked in.
 user_gemfile = File.expand_path('Gemfile.local.rb', __dir__)
 if File.exists?( user_gemfile )
-  puts "reading user gemfile"
   proc = Proc.new {}
   eval(File.read(user_gemfile), proc.binding, user_gemfile)
 end

@@ -35,6 +35,7 @@ guard :rspec, cmd: "bin/rspec" do
   watch(rspec.spec_helper) { rspec.spec_dir }
   watch(rspec.spec_support) { rspec.spec_dir }
   watch(rspec.spec_files)
+  ignore('spec/dummy/tmp', 'spec/dummy/log')
 
   # Ruby files
   ruby = dsl.ruby
