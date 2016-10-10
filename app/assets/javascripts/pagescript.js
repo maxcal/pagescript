@@ -14,7 +14,7 @@ var Pagescript = (function(ps, $){
 
   function trigger(str, data){
     var evt = template(str, data);
-    return $doc.trigger(namespace(evt));
+    return $doc.trigger(namespace(evt), data);
   }
 
   function parseEvents(str) {
@@ -36,6 +36,7 @@ var Pagescript = (function(ps, $){
   * @return this [Object]
   */
   ps.start = function() {
+    ps.stop();
     $doc.on('pagescript:load', function(){
       var data = $('body').data();
       trigger('controller#action', data);
@@ -72,8 +73,8 @@ var Pagescript = (function(ps, $){
   * @param handler [Function]
   * @return this [Object]
   **/
-  ps.on = function(events, selector, data, handler){
-    var args = jQuery.makeArray( arguments );
+  ps.on = function( events, selector, data, handler ){
+    var args = $.makeArray( arguments );
     args[0] = parseEvents(args[0]);
     $doc.on.apply($doc, args);
     return this;
@@ -85,8 +86,8 @@ var Pagescript = (function(ps, $){
   * @param handler [Function]
   * @return this [Object]
   **/
-  ps.off = function(events, selector, handler){
-    var args = jQuery.makeArray( arguments );
+  ps.off = function( events, selector, handler ){
+    var args = $.makeArray( arguments );
     args[0] = parseEvents(args[0]);
     $doc.off.apply($doc, args);
     return this;
@@ -100,12 +101,12 @@ var Pagescript = (function(ps, $){
   * @return this [Object]
   **/
   ps.one = function( events, selector, data, handler ){
-    var args = jQuery.makeArray( arguments );
+    var args = $.makeArray( arguments );
     args[0] = parseEvents(args[0]);
     $doc.one.apply($doc, args);
     return this;
   }
 
   // Export module
-	return ps.start();
+  return ps.start();
 }(Pagescript || {}, jQuery));
