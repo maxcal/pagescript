@@ -35,6 +35,9 @@ $ bundle
 Replace your the body tag in your `app/views/layouts/application.html.erb`
 with `<%= body_tag %>`. This adds *data* attributes that we can hook onto.
 
+You can optionally pass the `params_as_metadata: true` option to attach
+the url parameters to the body element. See [The pagescript event]
+
 ```javascript
 //= pagescript
 Pagescript.on('users', function(){
@@ -51,38 +54,77 @@ Pagescript.jumpstart();
 
 Note that you should not wrap this in a `$(document).ready` callback.
 
-## Javascript API
-Note that the pre 1.0 API will be relativly unstable. The goal is to eventually
-emulate the signatures of jQuery.on & jQuery.off.
+## Pagescript Event types
+On each page replacement (or load) Pagescript will fire multiple events that you can listen to.
+`*` symbolizes a wildcard.
 
+```JS
+// A specific controller_name and action
+$.on('pagescript:controller_name#action_name')
+// Any action belonging to a specific controller
+$.on('pagescript:controller_name#*')
+// Any action matching action_name
+$.on('pagescript:*#action_name')
+// Any page load
+$.on('pagescript:*')
+```
+
+When using the Pagescript API methods you don't need to include the `pagescript:`
+"namespace".
+
+## The Pagescript Event
+The [Event object](https://api.jquery.com/category/events/event-object/) which
+is passed to event handlers has the following extra properties:
+
+- controller [String]
+- action [String]
+- params [object]
+
+The params object is only populated if you have used the `params_as_metadata: true` option.
+
+```erb
+<%= body_tag(params_as_metadata: true) %>
+```
+
+The param keys are cast to `camelCase` by jQuery.
+
+## Javascript API
 All methods return the Pagescript module and can be chained.
+
+When using the Pagescript API methods you don't need to include the `pagescript:`
+"namespace" in the event name.
+
+### `Pagescript.kickstart`
+Used to start hook Pagescript to the `document.ready` event in the absense of
+Turbolinks
+
+### `Pagescript.off`
+Removes all handlers for the given event.
+See [jQuery.off](http://api.jquery.com/off/)
 
 ### `Pagescript.on`
 Attaches an event handler to a controller, a particular action or any action
 matching the name.
-Forwards to [jQuery.on](http://api.jquery.com/on/) under the covers.
 
-The following events are fired when a page is loaded:
+```JS
+Pagescript.on('foo#bar', function(e){
+  console.log( e.controller, e.action_name, e.params );
+  // "foo", "bar", {}
+});
+```
 
-- `controller_name`
-- `controller_name#action_name`
-- `#action_name`
+See [jQuery.on](http://api.jquery.com/on/)
 
 ### `Pagescript.one`
 Like `.on`, but the handler only fires once.
-Forwards to [jQuery.one](http://api.jquery.com/one/) under the covers.
 
-### `Pagescript.off`
-Removes all handlers for the given event.
-Forwards to [jQuery.off](http://api.jquery.com/off/) under the covers.
+See [jQuery.one](http://api.jquery.com/one/)
 
-### `Pagescript.kickstart`
-Used to start hook Pagescript to the `document.ready` event in the absense of
-Turbolinks.
+### `Pagescript.start`
+Adds the main event handler which Pagescript hinges on.
 
 ### `Pagescript.stop`
-Halts any Pagescript events from being fired - does not remove the handlers.
-
+Halts any Pagescript events from being fired - does not remove user created handlers. Call `.start` to reverse the effect.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

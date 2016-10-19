@@ -7,15 +7,27 @@ var Pagescript = (function(ps, $){
     return str.match(/pagescript:/) ? str : 'pagescript:' + str;
   }
 
-  function template(str, obj){
-    return str.replace('controller', obj.controller)
-              .replace('action', obj.action);
+  function trigger(str, data){
+    return $doc.trigger({
+      type: namespace(str),
+      controller: data.controller,
+      action: data.action,
+      params: filter_params(data)
+    });
   }
 
-  function trigger(str, data){
-    var evt = template(str, data);
-    return $doc.trigger(namespace(evt), data);
+  function filter_params(obj) {
+    var re = /^params([A-Z])(.*)/;
+    var filtered = {};
+    $.each( obj, function( key, value ) {
+      var matches = key.match(re);
+      if (matches) {
+        filtered[ matches[1].toLowerCase() + (matches[2] ||  "") ] = value;
+      }
+    });
+    return filtered;
   }
+
 
   function parseEvents(str) {
     return jQuery.map(str.split(' '), function(s){
@@ -39,9 +51,10 @@ var Pagescript = (function(ps, $){
     ps.stop();
     $doc.on('pagescript:load', function(){
       var data = $('body').data();
-      trigger('controller#action', data);
-      trigger('controller', data);
-      trigger('#action', data);
+      trigger(data.controller + "#" + data.action, data);
+      trigger(data.controller + "#*", data);
+      trigger("*#" + data.action , data);
+      trigger('*', data);
     });
     return ps;
   };
@@ -55,7 +68,7 @@ var Pagescript = (function(ps, $){
     return this;
   };
   /**
-  * Used to start hook Pagescript to the `document.ready`
+  * Used to hook Pagescript to the `document.ready`
   * event in the absense of Turbolinks.
   * @api
   * @return this [Object]

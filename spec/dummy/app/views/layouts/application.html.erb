@@ -8,8 +8,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <%= body_tag do %>
+  <%= body_tag(params_as_metadata: true) do %>
     <%= yield %>
     <ul id="logger"></ul>
+    <div id="test"></div>
   <% end %>
 </html>

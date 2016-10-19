@@ -19,7 +19,15 @@ function log(e){
 }
 
 Pagescript
-  .on('haikus #index haikus#index', log)
-  .on('#show', log)
+  .on('haikus#* *#index haikus#index', log)
+  .on('*#show', log)
   .on('haikus#show', log)
+  .on('pagescript:*', function(e){
+    $('#test').text(JSON.stringify({
+      type: e.type,
+      params: e.params,
+      action: e.action,
+      controller: e.controller
+    }));
+  })
   .kickstart();
