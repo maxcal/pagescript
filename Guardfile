@@ -28,20 +28,17 @@ guard :rspec, cmd: "bin/rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
-  # Feel free to open issues for suggestions and improvements
-
   # RSpec files
   rspec = dsl.rspec
   watch(rspec.spec_helper) { rspec.spec_dir }
   watch(rspec.spec_support) { rspec.spec_dir }
   watch(rspec.spec_files)
-  ignore('spec/dummy/tmp', 'spec/dummy/log')
 
-  # Ruby files
+  #  Ruby files
   ruby = dsl.ruby
   watch('pagescript.gemspec') { rspec.spec_dir }
   dsl.watch_spec_files_for(ruby.lib_files)
   watch(%r{^app/helpers/(.+)\.rb}) { |m| ["spec/helpers/#{m[1]}_spec.rb", "spec/features"]   }
   watch(%r{^app/assets/(.+)\.js}) { |m| "spec/features" }
-  watch(%r{^spec/dummy/(.+)\.*}) { rspec.spec_dir }
+  watch(%r{^spec/dummy/app/(.+)\.*}) { rspec.spec_dir }
 end

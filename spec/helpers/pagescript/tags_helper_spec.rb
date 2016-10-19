@@ -23,10 +23,11 @@ module Pagescript
 
     subject { attributes }
 
-
     before do
       allow(helper).to receive(:action_name).and_return('test_action')
     end
+
+    let(:output) { helper.body_tag }
 
     describe '#body_tag' do
       context 'when called without a block' do
@@ -65,6 +66,32 @@ module Pagescript
         it { should include 'data-foo' => 'bar' }
         it { should include 'data-controller' => 'test' }
         it { should include 'data-action' => 'test_action' }
+      end
+    end
+
+    context "params as metadata" do
+
+      before do
+        allow(helper.request).to receive(:path_parameters)
+                         .and_return(user_id: 99)
+        allow(helper.request).to receive(:query_parameters)
+                         .and_return(page: 5)
+      end
+
+      context "when false" do
+        let(:output) do
+          helper.body_tag
+        end
+        it { should_not have_key 'data-params-user-id'  }
+        it { should_not have_key 'data-params-page'  }
+      end
+
+      context "when true" do
+        let(:output) do
+          helper.body_tag(params_as_metadata: true)
+        end
+        it { should include 'data-params-user-id' => "99" }
+        it { should include 'data-params-page'  => "5" }
       end
     end
   end
