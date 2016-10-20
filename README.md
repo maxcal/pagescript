@@ -94,15 +94,18 @@ All methods return the Pagescript module and can be chained.
 When using the Pagescript API methods you don't need to include the `pagescript:`
 "namespace" in the event name.
 
-### `Pagescript.kickstart`
+`on`, `off` and `one` proxy to their jQuery counterparts. Please see the jQuery
+documentation for more details.
+
+### Pagescript.kickstart
 Used to start hook Pagescript to the `document.ready` event in the absense of
 Turbolinks
 
-### `Pagescript.off`
+### Pagescript.off
 Removes all handlers for the given event.
 See [jQuery.off](http://api.jquery.com/off/)
 
-### `Pagescript.on`
+### Pagescript.on
 Attaches an event handler to a controller, a particular action or any action
 matching the name.
 
@@ -115,15 +118,15 @@ Pagescript.on('foo#bar', function(e){
 
 See [jQuery.on](http://api.jquery.com/on/)
 
-### `Pagescript.one`
+### Pagescript.one
 Like `.on`, but the handler only fires once.
 
 See [jQuery.one](http://api.jquery.com/one/)
 
-### `Pagescript.start`
+### Pagescript.start
 Adds the main event handler which Pagescript hinges on.
 
-### `Pagescript.stop`
+### Pagescript.stop
 Halts any Pagescript events from being fired - does not remove user created handlers. Call `.start` to reverse the effect.
 
 ## License

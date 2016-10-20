@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    Pagescript (0.1.0)
-      jquery-rails
+    Pagescript (0.1.1)
+      jquery-rails (~> 4.2.1)
       rails (~> 5.0.0, >= 5.0.0.1)
 
 GEM
@@ -212,17 +212,17 @@ PLATFORMS
 
 DEPENDENCIES
   Pagescript!
-  guard-rspec
-  kramdown
+  guard-rspec (~> 4.7, >= 4.7.3)
+  kramdown (~> 1.12)
   launchy
-  poltergeist
-  rspec-rails
-  rubocop
-  spring
-  spring-commands-rspec
+  poltergeist (~> 1.11)
+  rspec-rails (~> 3.5, >= 3.5.2)
+  rubocop (~> 0.44.1)
+  spring (~> 2.0)
+  spring-commands-rspec (~> 1.0, >= 1.0.4)
   terminal-notifier
   terminal-notifier-guard
-  yard
+  yard (~> 0.9.5)
 
 BUNDLED WITH
    1.13.2
