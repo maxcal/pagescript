@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   action was requested.'
   s.license     = 'MIT'
 
-  s.files = Dir['{app,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
+  s.files = Dir['{app,lib, config}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
   s.required_ruby_version = '>= 2.2.2'
