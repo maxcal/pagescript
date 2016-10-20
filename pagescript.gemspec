@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 5.0.0', '>= 5.0.0.1'
   s.add_dependency 'jquery-rails', '~> 4.2', '>= 4.2.1'
   s.add_development_dependency 'yard', '~> 0.9.5'
-  s.add_development_dependency 'kramdown', '~> 1.12'
   s.add_development_dependency 'rspec-rails','~> 3.5', '>= 3.5.2'
   s.add_development_dependency 'guard-rspec', '~> 4.7', '>= 4.7.3'
   s.add_development_dependency 'spring', '~> 2.0'

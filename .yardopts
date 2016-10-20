@@ -1,7 +1,5 @@
 --embed-mixin ClassMethods
 --readme           README.md
---markup           markdown
---markup-provider  kramdown
 --template-path    yard
 --default-return   ""
 --files            'lib/**/*.rb'
@@ -12,3 +10,5 @@
 --no-highlight
 -
 MIT-LICENSE
+CONTRIBUTING.md
+DEVELOPMENT.md

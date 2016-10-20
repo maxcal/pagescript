@@ -33,20 +33,20 @@ $ bundle
 ## Usage
 
 Replace your the body tag in your `app/views/layouts/application.html.erb`
-with `<%= body_tag %>`. This adds *data* attributes that we can hook onto.
+with `<%= body_tag %>`. This adds [*data* attributes](https://developer.mozilla.org/docs/Web/Guide/HTML/Using_data_attributes) that we can hook onto.
 
 You can optionally pass the `params_as_metadata: true` option to attach
-the url parameters to the body element. See [The pagescript event]
+the url parameters to the body element. See [The pagescript event][#the-pagescript-event] for more details.
 
 ```javascript
 //= pagescript
-Pagescript.on('users', function(){
+Pagescript.on('users#*', function(){
     console.log('some action belonging to UsersController was rendered');
   }) // all methods are chainable
   .on('users#show', function(){
     console.log('Users#show action was called');
   }) // you can remove handlers as well.
-  .off('users');
+  .off('users#*');
 
 // This is only required if you are not using Turbolinks
 Pagescript.jumpstart();
@@ -131,3 +131,7 @@ Halts any Pagescript events from being fired - does not remove user created hand
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+## Want to help?
+See [Contributing](CONTRIBUTING.md) for how you can help and [Devlopment](DEVELOPMENT.md) for instructions to setup the test suite and
+what is expected of you.

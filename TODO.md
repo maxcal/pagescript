@@ -1,0 +1,3 @@
+- create a generator?
+- proper js documentation?
+- fix running rails server in the dummy app.
