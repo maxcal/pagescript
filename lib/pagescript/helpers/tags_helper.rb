@@ -27,7 +27,7 @@ module Pagescript
     # @since 0.1.0
     # @api
     def body_tag(params_as_metadata: false, **kwargs)
-      options = kwargs.deep_merge( data: data_attrs )
+      options = kwargs.deep_merge( data: data_attrs(params_as_metadata) )
       if block_given?
         content_tag(:body, options) { yield }
       else
@@ -37,7 +37,7 @@ module Pagescript
 
     private
 
-    def data_attrs
+    def data_attrs(params_as_metadata = false)
       {
         controller: controller_name,
         action: action_name

@@ -5,7 +5,7 @@ require 'pagescript/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = 'Pagescript'
+  s.name        = 'pagescript'
   s.version     = Pagescript::VERSION
   s.authors     = ['Max Calabrese']
   s.email       = ['max.calabrese@ymail.com']
