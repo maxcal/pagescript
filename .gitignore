@@ -7,6 +7,8 @@ spec/dummy/log/*.log
 spec/dummy/tmp/
 spec/examples.txt
 
+build
+
 /tmp
 
 .bundle/
